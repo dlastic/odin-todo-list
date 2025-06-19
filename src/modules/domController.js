@@ -1,9 +1,9 @@
 import { addTodo, getTodos } from "./todoManager";
 
 function renderTodos() {
-  const container = document.querySelector(".project-preview");
+  const container = document.querySelector(".project-content");
   container.innerHTML = "";
-  getTodos().forEach((todo, index) => {
+  getTodos().forEach((todo) => {
     const item = document.createElement("div");
     const title = document.createElement("h3");
     const description = document.createElement("p");
@@ -25,4 +25,36 @@ function renderTodos() {
   });
 }
 
-export { renderTodos };
+const projectHeading = document.querySelector(".project-heading");
+const projectContent = document.querySelector(".project-content");
+
+function clearContent() {
+  projectContent.innerHTML = "";
+}
+
+function renderView(view) {
+  clearContent();
+
+  switch (view) {
+    case "my-day":
+      projectHeading.textContent = "My Day";
+      projectContent.innerHTML = "<p>Tasks for today will be shown here.</p>";
+      break;
+
+    case "planned":
+      projectHeading.textContent = "Planned";
+      projectContent.innerHTML = "<p>Planned tasks will be shown here.</p>";
+      break;
+
+    case "all-tasks":
+      projectHeading.textContent = "All tasks";
+      projectContent.innerHTML = "<p>All tasks will be shown here.</p>";
+      break;
+
+    default:
+      projectHeading.textContent = "Unknown View";
+      projectContent.innerHTML = "<p>No view selected.</p>";
+  }
+}
+
+export { renderTodos, renderView };
