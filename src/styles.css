@@ -36,13 +36,68 @@ main.content {
   padding: 20px;
   color: #ffffff;
   border-right: 1px solid #1f3b62;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.nav-bar h2 {
-  margin-bottom: 20px;
-  font-size: 1.3rem;
+.nav-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
   border-bottom: 1px solid #1f3b62;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: #ffffff;
+  text-align: left;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background-color: #1f3b62;
+  outline: none;
+}
+
+.user-lists {
+  margin-top: 10px;
+}
+
+.add-list-btn {
+  margin-top: 15px;
+  background-color: #0a1d37;
+  border: none;
+  text-align: left;
+  color: #ffffff;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.add-list-btn:hover {
+  background-color: #1f3b62;
 }
 
 .project-preview {
