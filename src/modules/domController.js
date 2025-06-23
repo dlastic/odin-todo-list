@@ -1,9 +1,6 @@
-import { addTodo, getTodos } from "./todoManager";
-
-function renderTodos() {
-  const container = document.querySelector(".project-content");
+function renderTodos(todos, container) {
   container.innerHTML = "";
-  getTodos().forEach((todo) => {
+  todos.forEach((todo) => {
     const item = document.createElement("div");
     const title = document.createElement("h3");
     const description = document.createElement("p");

@@ -1,5 +1,4 @@
 import "./styles.css";
-import { addTodo } from "./modules/todoManager";
 import { renderTodos, renderView } from "./modules/domController";
 import bindEvents from "./modules/navController";
 
