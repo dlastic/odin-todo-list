@@ -1,6 +1,6 @@
 export default class TodoList {
-  constructor(title) {
-    this.title = title;
+  constructor(name) {
+    this.name = name;
     this.todos = [];
   }
 
@@ -16,7 +16,7 @@ export default class TodoList {
     return this.todos;
   }
 
-  getTitle() {
-    return this.title;
+  getName() {
+    return this.name;
   }
 }
