@@ -84,7 +84,7 @@ main.content {
 }
 
 .add-list-btn {
-  margin-top: 15px;
+  margin-top: 10px;
   background-color: #0a1d37;
   border: none;
   text-align: left;
@@ -100,6 +100,7 @@ main.content {
   border-radius: 5px;
   z-index: 100;
   color: #0a1d37;
+  margin-top: 10px;
 }
 
 .add-list-popup input {

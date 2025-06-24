@@ -54,4 +54,18 @@ function renderView(view) {
   }
 }
 
-export { renderTodos, renderView };
+function toggleHidden(element) {
+  element.classList.toggle("hidden");
+}
+
+function toggleHiddenGroup(elements) {
+  elements.forEach((element) => {
+    toggleHidden(element);
+  });
+}
+
+function clearInput(inputEl) {
+  inputEl.value = "";
+}
+
+export { renderTodos, renderView, toggleHidden, toggleHiddenGroup, clearInput };
