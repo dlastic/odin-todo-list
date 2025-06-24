@@ -1,5 +1,9 @@
-function renderTodos(todos, container) {
+function clearContainer(container) {
   container.innerHTML = "";
+}
+
+function renderTodos(todos, container) {
+  clearContainer(container);
   todos.forEach((todo) => {
     const item = document.createElement("div");
     const title = document.createElement("h3");
@@ -22,16 +26,11 @@ function renderTodos(todos, container) {
   });
 }
 
-const projectHeading = document.querySelector(".project-heading");
-const projectContent = document.querySelector(".project-content");
-
-function clearContent() {
-  projectContent.innerHTML = "";
-}
-
 function renderView(view) {
-  clearContent();
+  const projectHeading = document.querySelector(".project-heading");
+  const projectContent = document.querySelector(".project-content");
 
+  clearContainer(projectContent);
   switch (view) {
     case "my-day":
       projectHeading.textContent = "My Day";
@@ -54,6 +53,21 @@ function renderView(view) {
   }
 }
 
+function renderLists(lists) {
+  const listsContainer = document.querySelector(".user-lists");
+  clearContainer(listsContainer);
+  lists.forEach((list) => {
+    const listItem = document.createElement("li");
+    const btn = document.createElement("button");
+
+    btn.classList.add("nav-link");
+    btn.textContent = list.getName();
+
+    listItem.appendChild(btn);
+    listsContainer.appendChild(listItem);
+  });
+}
+
 function toggleHidden(element) {
   element.classList.toggle("hidden");
 }
@@ -68,4 +82,11 @@ function clearInput(inputEl) {
   inputEl.value = "";
 }
 
-export { renderTodos, renderView, toggleHidden, toggleHiddenGroup, clearInput };
+export {
+  renderTodos,
+  renderView,
+  renderLists,
+  toggleHidden,
+  toggleHiddenGroup,
+  clearInput,
+};

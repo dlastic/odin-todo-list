@@ -3,7 +3,9 @@ import {
   toggleHidden,
   toggleHiddenGroup,
   clearInput,
+  renderLists,
 } from "./domController";
+import { addList, getLists } from "./listManager";
 
 export default function bindEvents() {
   const homeBtns = document.querySelectorAll(".home-section button");
@@ -27,8 +29,10 @@ export default function bindEvents() {
   });
 
   addNewListBtn.addEventListener("click", () => {
+    addList(addNewListInput.value);
     toggleHiddenGroup(addListGroup);
     clearInput(addNewListInput);
+    renderLists(getLists())
   });
 
   cancelNewListBtn.addEventListener("click", () => {
