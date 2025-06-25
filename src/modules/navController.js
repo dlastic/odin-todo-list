@@ -28,6 +28,10 @@ export default function bindEvents() {
     });
   });
 
+  addListBtn.addEventListener("click", () => {
+    addNewListInput.focus();
+  });
+
   addNewListInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       addNewListBtn.click();
