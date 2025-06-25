@@ -28,11 +28,17 @@ export default function bindEvents() {
     });
   });
 
+  addNewListInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      addNewListBtn.click();
+    }
+  });
+
   addNewListBtn.addEventListener("click", () => {
     addList(addNewListInput.value);
     toggleHiddenGroup(addListGroup);
     clearInput(addNewListInput);
-    renderLists(getLists())
+    renderLists(getLists());
   });
 
   cancelNewListBtn.addEventListener("click", () => {
