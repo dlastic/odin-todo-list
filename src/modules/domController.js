@@ -1,3 +1,5 @@
+import { getAllTodos, getGlobalTodos } from "./listManager";
+
 function clearContainer(container) {
   container.innerHTML = "";
 }
@@ -44,7 +46,7 @@ function renderView(view) {
 
     case "all-tasks":
       projectHeading.textContent = "All tasks";
-      projectContent.innerHTML = "<p>All tasks will be shown here.</p>";
+      renderTodos(getAllTodos(), projectContent);
       break;
 
     default:

@@ -21,4 +21,12 @@ function getGlobalTodos() {
   return globalList.getTodos();
 }
 
-export { addList, getLists, addGlobalTodo, getGlobalTodos };
+function getAllTodos() {
+  const todos = [...getGlobalTodos()];
+  lists.forEach((list) => {
+    todos.push(...list.getTodos());
+  });
+  return todos;
+}
+
+export { addList, getLists, addGlobalTodo, getGlobalTodos, getAllTodos };
