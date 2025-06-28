@@ -169,7 +169,6 @@ main.content {
 
 .project-new-todo {
   margin-top: 25px;
-  position: relative;
 }
 
 .new-todo-btn {
@@ -196,9 +195,6 @@ main.content {
   border-radius: 6px;
   box-shadow: 0 4px 16px rgba(10, 29, 55, 0.15);
   padding: 20px;
-  position: absolute;
-  top: 48px;
-  left: 0;
   min-width: 270px;
   z-index: 200;
 }
