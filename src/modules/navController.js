@@ -4,6 +4,7 @@ import {
   toggleHiddenGroup,
   clearInput,
   renderLists,
+  setMinimumDate,
 } from "./domController";
 import { addList, getLists } from "./listManager";
 
@@ -21,6 +22,11 @@ export default function bindEvents() {
   const addTodoBtn = document.querySelector(".add-todo-btn");
   const cancelTodoBtn = document.querySelector(".cancel-todo-btn");
   const newTodoForm = document.querySelector(".new-todo-form");
+  const dueDateInput = document.querySelector("#due-date");
+
+  document.addEventListener("DOMContentLoaded", () => {
+    setMinimumDate(dueDateInput);
+  });
 
   homeBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -62,5 +68,5 @@ export default function bindEvents() {
 
   cancelTodoBtn.addEventListener("click", () => {
     toggleHiddenGroup(newTodoGroup);
-  })
+  });
 }

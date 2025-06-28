@@ -84,6 +84,11 @@ function clearInput(inputEl) {
   inputEl.value = "";
 }
 
+function setMinimumDate(inputEl) {
+  const today = new Date().toISOString().split("T")[0];
+  inputEl.min = today;
+}
+
 export {
   renderTodos,
   renderView,
@@ -91,4 +96,5 @@ export {
   toggleHidden,
   toggleHiddenGroup,
   clearInput,
+  setMinimumDate,
 };
