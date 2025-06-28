@@ -15,6 +15,12 @@ export default function bindEvents() {
   const addNewListBtn = document.querySelector(".add-btn");
   const cancelNewListBtn = document.querySelector(".cancel-btn");
   const addNewListInput = document.querySelector(".add-list-input");
+  const newTodoBtn = document.querySelector(".new-todo-btn");
+  const newTodoPopup = document.querySelector(".new-todo-popup");
+  const newTodoGroup = [newTodoBtn, newTodoPopup];
+  const addTodoBtn = document.querySelector(".add-todo-btn");
+  const cancelTodoBtn = document.querySelector(".cancel-todo-btn");
+  const newTodoForm = document.querySelector(".new-todo-form");
 
   homeBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -49,4 +55,12 @@ export default function bindEvents() {
     toggleHiddenGroup(addListGroup);
     clearInput(addNewListBtn);
   });
+
+  newTodoBtn.addEventListener("click", () => {
+    toggleHiddenGroup(newTodoGroup);
+  });
+
+  cancelTodoBtn.addEventListener("click", () => {
+    toggleHiddenGroup(newTodoGroup);
+  })
 }
