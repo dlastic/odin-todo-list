@@ -69,4 +69,8 @@ export default function bindEvents() {
   cancelTodoBtn.addEventListener("click", () => {
     toggleHiddenGroup(newTodoGroup);
   });
+
+  dueDateInput.addEventListener("click", () => {
+    dueDateInput.showPicker();
+  });
 }
