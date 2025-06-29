@@ -1,5 +1,7 @@
 import { getAllTodos, getGlobalTodos } from "./listManager";
 
+let currentView = "my-day"; // Default view
+
 function clearContainer(container) {
   container.innerHTML = "";
 }
@@ -31,7 +33,7 @@ function renderTodos(todos, container) {
 function renderView(view) {
   const projectHeading = document.querySelector(".project-heading");
   const projectContent = document.querySelector(".project-content");
-
+  currentView = view;
   clearContainer(projectContent);
   switch (view) {
     case "my-day":
@@ -89,10 +91,20 @@ function setMinimumDate(inputEl) {
   inputEl.min = today;
 }
 
+function getFormData(form) {
+  const formData = new FormData(form);
+  const data = {};
+  formData.forEach((value, key) => {
+    data[key] = value;
+  });
+  return data;
+}
+
 export {
   renderTodos,
   renderView,
   renderLists,
+  getFormData,
   toggleHidden,
   toggleHiddenGroup,
   clearInput,

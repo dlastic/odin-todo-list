@@ -5,8 +5,10 @@ import {
   clearInput,
   renderLists,
   setMinimumDate,
+  getFormData,
 } from "./domController";
-import { addList, getLists } from "./listManager";
+import { addGlobalTodo, addList, getLists } from "./listManager";
+import Todo from "./todo";
 
 export default function bindEvents() {
   const homeBtns = document.querySelectorAll(".home-section button");
@@ -21,12 +23,13 @@ export default function bindEvents() {
   const newTodoGroup = [newTodoBtn, newTodoPopup];
   const addTodoBtn = document.querySelector(".add-todo-btn");
   const cancelTodoBtn = document.querySelector(".cancel-todo-btn");
-  const newTodoForm = document.querySelector(".new-todo-form");
+  const newTodoForm = document.querySelector("#new-todo-form");
   const dueDateInput = document.querySelector("#due-date");
   const todoTitleInput = document.querySelector(".new-todo-title");
 
   document.addEventListener("DOMContentLoaded", () => {
     setMinimumDate(dueDateInput);
+    renderView("my-day");
   });
 
   homeBtns.forEach((btn) => {
@@ -66,6 +69,15 @@ export default function bindEvents() {
   newTodoBtn.addEventListener("click", () => {
     toggleHiddenGroup(newTodoGroup);
     todoTitleInput.focus();
+  });
+
+  newTodoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const { title, description, dueDate, priority } = getFormData(newTodoForm);
+    addGlobalTodo(new Todo(title, description, dueDate, priority));
+    toggleHiddenGroup(newTodoGroup);
+    newTodoForm.reset();
   });
 
   cancelTodoBtn.addEventListener("click", () => {
