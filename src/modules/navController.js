@@ -23,6 +23,7 @@ export default function bindEvents() {
   const cancelTodoBtn = document.querySelector(".cancel-todo-btn");
   const newTodoForm = document.querySelector(".new-todo-form");
   const dueDateInput = document.querySelector("#due-date");
+  const todoTitleInput = document.querySelector(".new-todo-title");
 
   document.addEventListener("DOMContentLoaded", () => {
     setMinimumDate(dueDateInput);
@@ -64,6 +65,7 @@ export default function bindEvents() {
 
   newTodoBtn.addEventListener("click", () => {
     toggleHiddenGroup(newTodoGroup);
+    todoTitleInput.focus();
   });
 
   cancelTodoBtn.addEventListener("click", () => {
