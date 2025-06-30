@@ -3,6 +3,7 @@ import {
   getGlobalTodos,
   getTodayTodos,
   getPlannedTodos,
+  getLists,
 } from "./listManager";
 
 let currentView = "my-day"; // Default view
@@ -40,6 +41,17 @@ function renderView(view) {
   const projectContent = document.querySelector(".project-content");
   currentView = view;
   clearContainer(projectContent);
+
+  const lists = getLists();
+  const matchedList = lists.find(
+    (list) => list.getName().toLowerCase().replace(/\s+/g, "-") === view
+  );
+  if (matchedList) {
+    projectHeading.textContent = matchedList.getName();
+    renderTodos(matchedList.getTodos(), projectContent);
+    return;
+  }
+
   switch (view) {
     case "my-day":
       projectHeading.textContent = "My Day";

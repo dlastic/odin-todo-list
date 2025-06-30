@@ -71,6 +71,7 @@ export default function bindEvents() {
     resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
     addDataViewToLists(getLists());
+    bindUserListEvents();
   });
 
   cancelNewListBtn.addEventListener("click", () => {
@@ -100,5 +101,14 @@ export default function bindEvents() {
 
   dueDateInput.addEventListener("click", () => {
     dueDateInput.showPicker();
+  });
+}
+
+function bindUserListEvents() {
+  const userListButtons = document.querySelectorAll(".user-lists li button");
+  userListButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      renderView(btn.dataset.view);
+    });
   });
 }
