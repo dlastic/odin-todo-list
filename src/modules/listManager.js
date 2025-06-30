@@ -4,7 +4,13 @@ const lists = [];
 const globalList = new TodoList("Global");
 
 function addList(name) {
-  const list = new TodoList(name);
+  const trimmed = name.trim();
+  if (
+    lists.some((list) => list.getName().toLowerCase() === trimmed.toLowerCase())
+  ) {
+    return null;
+  }
+  const list = new TodoList(trimmed);
   lists.push(list);
   return list;
 }
