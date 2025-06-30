@@ -157,6 +157,10 @@ main.content {
   color: #0a1d37;
 }
 
+.project-heading {
+  margin-bottom: 15px;
+}
+
 .todo-item {
   background-color: #ffffff;
   color: #0a1d37;
@@ -165,10 +169,6 @@ main.content {
   margin-bottom: 15px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.project-new-todo {
-  margin-top: 25px;
 }
 
 .new-todo-btn {
