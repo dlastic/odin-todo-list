@@ -30,9 +30,7 @@ function getAllTodos() {
 }
 
 function getPlannedTodos() {
-  return getAllTodos().filter(
-    (todo) => todo.dueDate !== undefined && todo.dueDate !== null
-  );
+  return getAllTodos().filter((todo) => Boolean(todo.dueDate));
 }
 
 function getTodayTodos() {

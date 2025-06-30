@@ -1,4 +1,4 @@
-import { getAllTodos, getGlobalTodos } from "./listManager";
+import { getAllTodos, getGlobalTodos, getTodayTodos, getPlannedTodos } from "./listManager";
 
 let currentView = "my-day"; // Default view
 
@@ -38,10 +38,12 @@ function renderView(view) {
   switch (view) {
     case "my-day":
       projectHeading.textContent = "My Day";
+      renderTodos(getTodayTodos(), projectContent);
       break;
 
     case "planned":
       projectHeading.textContent = "Planned";
+      renderTodos(getPlannedTodos(), projectContent);
       break;
 
     case "all-tasks":
