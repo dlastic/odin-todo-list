@@ -115,6 +115,13 @@ function resetListInputPlaceholder(input) {
   input.placeholder = "Enter list name";
 }
 
+function addDataViewToLists(lists) {
+  const listButtons = document.querySelectorAll(".user-lists li button");
+  listButtons.forEach((list) => {
+    list.dataset.view = list.textContent.toLowerCase().replace(/\s+/g, "-");
+  });
+}
+
 export {
   renderTodos,
   renderView,
@@ -126,4 +133,5 @@ export {
   resetListInputPlaceholder,
   setMinimumDate,
   showListInputError,
+  addDataViewToLists,
 };

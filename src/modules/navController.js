@@ -8,6 +8,7 @@ import {
   getFormData,
   showListInputError,
   resetListInputPlaceholder,
+  addDataViewToLists,
 } from "./domController";
 import { addGlobalTodo, addList, getLists } from "./listManager";
 import Todo from "./todo";
@@ -69,6 +70,7 @@ export default function bindEvents() {
     clearInput(addNewListInput);
     resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
+    addDataViewToLists(getLists());
   });
 
   cancelNewListBtn.addEventListener("click", () => {
