@@ -21,7 +21,6 @@ export default function bindEvents() {
   const newTodoBtn = document.querySelector(".new-todo-btn");
   const newTodoPopup = document.querySelector(".new-todo-popup");
   const newTodoGroup = [newTodoBtn, newTodoPopup];
-  const addTodoBtn = document.querySelector(".add-todo-btn");
   const cancelTodoBtn = document.querySelector(".cancel-todo-btn");
   const newTodoForm = document.querySelector("#new-todo-form");
   const dueDateInput = document.querySelector("#due-date");
@@ -77,6 +76,7 @@ export default function bindEvents() {
     const { title, description, dueDate, priority } = getFormData(newTodoForm);
     addGlobalTodo(new Todo(title, description, dueDate, priority));
     toggleHiddenGroup(newTodoGroup);
+    renderView();
     newTodoForm.reset();
   });
 

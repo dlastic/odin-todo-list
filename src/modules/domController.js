@@ -38,22 +38,20 @@ function renderView(view) {
   switch (view) {
     case "my-day":
       projectHeading.textContent = "My Day";
-      projectContent.innerHTML = "<p>Tasks for today will be shown here.</p>";
       break;
 
     case "planned":
       projectHeading.textContent = "Planned";
-      projectContent.innerHTML = "<p>Planned tasks will be shown here.</p>";
       break;
 
     case "all-tasks":
-      projectHeading.textContent = "All tasks";
+      projectHeading.textContent = "All Tasks";
       renderTodos(getAllTodos(), projectContent);
       break;
 
     default:
-      projectHeading.textContent = "Unknown View";
-      projectContent.innerHTML = "<p>No view selected.</p>";
+      projectHeading.textContent = "All Tasks";
+      renderTodos(getAllTodos(), projectContent);
   }
 }
 
