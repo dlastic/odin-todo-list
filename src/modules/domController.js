@@ -1,4 +1,9 @@
-import { getAllTodos, getGlobalTodos, getTodayTodos, getPlannedTodos } from "./listManager";
+import {
+  getAllTodos,
+  getGlobalTodos,
+  getTodayTodos,
+  getPlannedTodos,
+} from "./listManager";
 
 let currentView = "my-day"; // Default view
 
@@ -100,6 +105,16 @@ function getFormData(form) {
   return data;
 }
 
+function showListInputError(input, message) {
+  input.value = "";
+  input.placeholder = message;
+  input.focus();
+}
+
+function resetListInputPlaceholder(input) {
+  input.placeholder = "Enter list name";
+}
+
 export {
   renderTodos,
   renderView,
@@ -108,5 +123,7 @@ export {
   toggleHidden,
   toggleHiddenGroup,
   clearInput,
+  resetListInputPlaceholder,
   setMinimumDate,
+  showListInputError,
 };

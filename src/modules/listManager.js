@@ -5,6 +5,9 @@ const globalList = new TodoList("Global");
 
 function addList(name) {
   const trimmed = name.trim();
+  if (!trimmed) {
+    return null;
+  }
   if (
     lists.some((list) => list.getName().toLowerCase() === trimmed.toLowerCase())
   ) {

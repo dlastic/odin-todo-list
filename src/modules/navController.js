@@ -6,6 +6,8 @@ import {
   renderLists,
   setMinimumDate,
   getFormData,
+  showListInputError,
+  resetListInputPlaceholder,
 } from "./domController";
 import { addGlobalTodo, addList, getLists } from "./listManager";
 import Todo from "./todo";
@@ -54,15 +56,25 @@ export default function bindEvents() {
   });
 
   addNewListBtn.addEventListener("click", () => {
-    addList(addNewListInput.value);
+    const result = addList(addNewListInput.value);
+    if (!addNewListInput.value.trim()) {
+      showListInputError(addNewListInput, "List name required!");
+      return;
+    }
+    if (result === null) {
+      showListInputError(addNewListInput, "List already exists!");
+      return;
+    }
     toggleHiddenGroup(addListGroup);
     clearInput(addNewListInput);
+    resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
   });
 
   cancelNewListBtn.addEventListener("click", () => {
     toggleHiddenGroup(addListGroup);
     clearInput(addNewListBtn);
+    resetListInputPlaceholder(addNewListInput);
   });
 
   newTodoBtn.addEventListener("click", () => {
