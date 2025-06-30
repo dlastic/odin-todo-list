@@ -9,7 +9,7 @@ function addList(name) {
   return list;
 }
 
-function getLists(params) {
+function getLists() {
   return lists;
 }
 
@@ -29,4 +29,30 @@ function getAllTodos() {
   return todos;
 }
 
-export { addList, getLists, addGlobalTodo, getGlobalTodos, getAllTodos };
+function getPlannedTodos() {
+  return getAllTodos().filter(
+    (todo) => todo.dueDate !== undefined && todo.dueDate !== null
+  );
+}
+
+function getTodayTodos() {
+  const today = new Date();
+  return getAllTodos().filter((todo) => {
+    const dueDate = new Date(todo.dueDate);
+    return (
+      dueDate.getFullYear() === today.getFullYear() &&
+      dueDate.getMonth() === today.getMonth() &&
+      dueDate.getDate() === today.getDate()
+    );
+  });
+}
+
+export {
+  addList,
+  getLists,
+  addGlobalTodo,
+  getGlobalTodos,
+  getAllTodos,
+  getPlannedTodos,
+  getTodayTodos,
+};
