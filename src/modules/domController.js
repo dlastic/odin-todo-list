@@ -1,6 +1,5 @@
 import {
   getAllTodos,
-  getGlobalTodos,
   getTodayTodos,
   getPlannedTodos,
   getLists,
@@ -146,4 +145,5 @@ export {
   setMinimumDate,
   showListInputError,
   addDataViewToLists,
+  currentView
 };

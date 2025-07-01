@@ -9,6 +9,7 @@ import {
   showListInputError,
   resetListInputPlaceholder,
   addDataViewToLists,
+  currentView,
 } from "./domController";
 import { addGlobalTodo, addList, getLists } from "./listManager";
 import Todo from "./todo";
@@ -89,9 +90,21 @@ export default function bindEvents() {
     e.preventDefault();
 
     const { title, description, dueDate, priority } = getFormData(newTodoForm);
-    addGlobalTodo(new Todo(title, description, dueDate, priority));
+    if (["my-day", "planned", "today"].includes(currentView)) {
+      addGlobalTodo(new Todo(title, description, dueDate, priority));
+    } else {
+      const currentList = getLists().find(
+        (list) =>
+          list.getName().toLowerCase().replace(/\s+/g, "-") === currentView
+      );
+      if (!currentList) {
+        console.error("Current list not found!");
+        return;
+      }
+      currentList.addTodo(new Todo(title, description, dueDate, priority));
+    }
     toggleHiddenGroup(newTodoGroup);
-    renderView();
+    renderView(currentView);
     newTodoForm.reset();
   });
 
