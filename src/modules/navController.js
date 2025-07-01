@@ -72,12 +72,13 @@ export default function bindEvents() {
     resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
     addDataViewToLists(getLists());
+    renderView(result.getName().toLowerCase().replace(/\s+/g, "-"));
     bindUserListEvents();
   });
 
   cancelNewListBtn.addEventListener("click", () => {
     toggleHiddenGroup(addListGroup);
-    clearInput(addNewListBtn);
+    clearInput(addNewListInput);
     resetListInputPlaceholder(addNewListInput);
   });
 
@@ -90,7 +91,7 @@ export default function bindEvents() {
     e.preventDefault();
 
     const { title, description, dueDate, priority } = getFormData(newTodoForm);
-    if (["my-day", "planned", "today"].includes(currentView)) {
+    if (["my-day", "planned", "all-tasks"].includes(currentView)) {
       addGlobalTodo(new Todo(title, description, dueDate, priority));
     } else {
       const currentList = getLists().find(
