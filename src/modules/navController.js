@@ -8,7 +8,6 @@ import {
   getFormData,
   showListInputError,
   resetListInputPlaceholder,
-  addDataViewToLists,
   currentView,
 } from "./domController";
 import { addGlobalTodo, addList, getLists } from "./listManager";
