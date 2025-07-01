@@ -1,5 +1,8 @@
+let nextListId = 1;
+
 export default class TodoList {
   constructor(name) {
+    this.id = nextListId++;
     this.name = name;
     this.todos = [];
   }

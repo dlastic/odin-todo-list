@@ -71,8 +71,7 @@ export default function bindEvents() {
     clearInput(addNewListInput);
     resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
-    addDataViewToLists(getLists());
-    renderView(result.getName().toLowerCase().replace(/\s+/g, "-"));
+    renderView(result.id);
     bindUserListEvents();
   });
 
@@ -95,8 +94,7 @@ export default function bindEvents() {
       addGlobalTodo(new Todo(title, description, dueDate, priority));
     } else {
       const currentList = getLists().find(
-        (list) =>
-          list.getName().toLowerCase().replace(/\s+/g, "-") === currentView
+        (list) => list.id === currentView || list.id === Number(currentView)
       );
       if (!currentList) {
         console.error("Current list not found!");
@@ -122,7 +120,11 @@ function bindUserListEvents() {
   const userListButtons = document.querySelectorAll(".user-lists li button");
   userListButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      renderView(btn.dataset.view);
+      const id = Number(btn.dataset.id);
+      const list = getLists().find((l) => l.id === id);
+      if (list) {
+        renderView(list.id);
+      }
     });
   });
 }

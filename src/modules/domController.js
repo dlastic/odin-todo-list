@@ -43,7 +43,7 @@ function renderView(view) {
 
   const lists = getLists();
   const matchedList = lists.find(
-    (list) => list.getName().toLowerCase().replace(/\s+/g, "-") === view
+    (list) => list.id === view || list.id === Number(view)
   );
   if (matchedList) {
     projectHeading.textContent = matchedList.getName();
@@ -82,6 +82,7 @@ function renderLists(lists) {
 
     btn.classList.add("nav-link");
     btn.textContent = list.getName();
+    btn.dataset.id = list.id;
 
     listItem.appendChild(btn);
     listsContainer.appendChild(listItem);
@@ -145,5 +146,5 @@ export {
   setMinimumDate,
   showListInputError,
   addDataViewToLists,
-  currentView
+  currentView,
 };
