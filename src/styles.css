@@ -171,7 +171,7 @@ main.content {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .todo-check {
@@ -195,6 +195,7 @@ main.content {
   padding: 5px 10px;
 }
 
+.todo-important,
 .todo-menu {
   display: flex;
   align-items: center;
@@ -203,7 +204,8 @@ main.content {
   height: 30px;
   border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.4s;
+  transition: background-color 0.2s;
+  font-size: 1.3rem;
 }
 
 .todo-menu:hover {

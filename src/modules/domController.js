@@ -18,6 +18,7 @@ function renderTodos(todos, container) {
     const checkDiv = document.createElement("div");
     const todoDetails = document.createElement("div");
     const menuDiv = document.createElement("div");
+    const importantDiv = document.createElement("div");
     const title = document.createElement("h3");
     const description = document.createElement("p");
     const dueDate = document.createElement("div");
@@ -30,23 +31,32 @@ function renderTodos(todos, container) {
     menuDiv.classList.add("todo-menu");
     dueDate.classList.add("todo-due-date");
     menuIcon.classList.add("todo-menu-icon");
-    menuIcon.classList.add("fa", "fa-ellipsis-v");
+    menuIcon.classList.add("fa", "fa-ellipsis-vertical");
+    importantDiv.classList.add("todo-important");
     importantIcon.classList.add("todo-important-icon");
-    importantIcon.classList.add("fa", "fa-star");
+    todo.isImportant
+      ? importantIcon.classList.add("fas", "fa-star")
+      : importantIcon.classList.add("far", "fa-star");
+
+    importantIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+      todo.isImportant = !todo.isImportant;
+      renderView(currentView);
+    });
 
     title.textContent = todo.title;
     description.textContent = todo.description;
     dueDate.textContent = `${todo.dueDate ? todo.dueDate : "No Due Date"}`;
 
-
     todoDetails.appendChild(title);
     todoDetails.appendChild(description);
     menuDiv.appendChild(menuIcon);
-    
+    importantDiv.appendChild(importantIcon);
+
     item.appendChild(checkDiv);
     item.appendChild(todoDetails);
     item.appendChild(dueDate);
-    item.appendChild(importantIcon);
+    item.appendChild(importantDiv);
     item.appendChild(menuDiv);
 
     container.appendChild(item);

@@ -88,10 +88,9 @@ export default function bindEvents() {
   newTodoForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const { title, description, dueDate, isImportant } =
-      getFormData(newTodoForm);
+    const { title, description, dueDate } = getFormData(newTodoForm);
     if (["my-day", "planned", "all-tasks"].includes(currentView)) {
-      addGlobalTodo(new Todo(title, description, dueDate, isImportant));
+      addGlobalTodo(new Todo(title, description, dueDate));
     } else {
       const currentList = getLists().find(
         (list) => list.id === currentView || list.id === Number(currentView)
@@ -100,7 +99,7 @@ export default function bindEvents() {
         console.error("Current list not found!");
         return;
       }
-      currentList.addTodo(new Todo(title, description, dueDate, isImportant));
+      currentList.addTodo(new Todo(title, description, dueDate));
     }
     toggleHiddenGroup(newTodoGroup);
     renderView(currentView);
