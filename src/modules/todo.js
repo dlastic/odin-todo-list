@@ -1,16 +1,16 @@
 export default class Todo {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, isImportant) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
-    this.priority = priority;
+    this.isImportant = isImportant;
   }
 
   toggleComplete() {
     this.completed = !this.completed;
   }
 
-  updatePriority(newPriority) {
-    this.priority = newPriority;
+  updateImportance(isImportant) {
+    this.isImportant = isImportant;
   }
 }

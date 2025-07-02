@@ -5,7 +5,7 @@ import {
   getLists,
 } from "./listManager";
 
-let currentView = "my-day"; // Default view
+let currentView = "all-tasks"; // Default view
 
 function clearContainer(container) {
   container.innerHTML = "";
@@ -15,21 +15,39 @@ function renderTodos(todos, container) {
   clearContainer(container);
   todos.forEach((todo) => {
     const item = document.createElement("div");
+    const checkDiv = document.createElement("div");
+    const todoDetails = document.createElement("div");
+    const menuDiv = document.createElement("div");
     const title = document.createElement("h3");
     const description = document.createElement("p");
-    const dueDate = document.createElement("p");
-    const priority = document.createElement("p");
+    const dueDate = document.createElement("div");
+    const importantIcon = document.createElement("i");
+    const menuIcon = document.createElement("i");
 
     item.classList.add("todo-item");
+    checkDiv.classList.add("todo-check");
+    todoDetails.classList.add("todo-details");
+    menuDiv.classList.add("todo-menu");
+    dueDate.classList.add("todo-due-date");
+    menuIcon.classList.add("todo-menu-icon");
+    menuIcon.classList.add("fa", "fa-ellipsis-v");
+    importantIcon.classList.add("todo-important-icon");
+    importantIcon.classList.add("fa", "fa-star");
+
     title.textContent = todo.title;
     description.textContent = todo.description;
-    dueDate.textContent = `Due: ${todo.dueDate}`;
-    priority.textContent = `Priority: ${todo.priority}`;
+    dueDate.textContent = `${todo.dueDate ? todo.dueDate : "No Due Date"}`;
 
-    item.appendChild(title);
-    item.appendChild(description);
+
+    todoDetails.appendChild(title);
+    todoDetails.appendChild(description);
+    menuDiv.appendChild(menuIcon);
+    
+    item.appendChild(checkDiv);
+    item.appendChild(todoDetails);
     item.appendChild(dueDate);
-    item.appendChild(priority);
+    item.appendChild(importantIcon);
+    item.appendChild(menuDiv);
 
     container.appendChild(item);
   });
