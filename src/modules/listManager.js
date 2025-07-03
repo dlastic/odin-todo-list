@@ -47,8 +47,8 @@ function getGlobalTodos() {
 }
 
 function getAllTodos() {
-  const todos = [...getGlobalTodos()];
-  lists.forEach((list) => {
+  const todos = [];
+  getAllLists().forEach((list) => {
     todos.push(...list.getTodos());
   });
   return todos;
