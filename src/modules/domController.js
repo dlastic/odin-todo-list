@@ -38,7 +38,7 @@ function renderTodos(todos, container) {
       ? importantIcon.classList.add("fas", "fa-star")
       : importantIcon.classList.add("far", "fa-star");
 
-    importantIcon.addEventListener("click", (e) => {
+    importantDiv.addEventListener("click", (e) => {
       e.stopPropagation();
       todo.isImportant = !todo.isImportant;
       renderView(currentView);

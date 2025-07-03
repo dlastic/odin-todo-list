@@ -208,7 +208,8 @@ main.content {
   font-size: 1.3rem;
 }
 
-.todo-menu:hover {
+.todo-menu:hover,
+.todo-important:hover:has(.far) {
   background-color: #cecece;
 }
 
