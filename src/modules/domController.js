@@ -19,12 +19,13 @@ function renderTodos(todos, container) {
     const item = document.createElement("div");
     const checkDiv = document.createElement("div");
     const todoDetails = document.createElement("div");
-    const menuDiv = document.createElement("div");
+    const menuContainer = document.createElement("div");
     const importantDiv = document.createElement("div");
     const title = document.createElement("h3");
     const description = document.createElement("p");
     const dueDate = document.createElement("div");
     const importantIcon = document.createElement("i");
+    const menuIconContainer = document.createElement("div");
     const menuIcon = document.createElement("i");
     const todoEditOptions = document.createElement("div");
     const todoEdit = document.createElement("button");
@@ -33,9 +34,9 @@ function renderTodos(todos, container) {
     item.classList.add("todo-item");
     checkDiv.classList.add("todo-check");
     todoDetails.classList.add("todo-details");
-    menuDiv.classList.add("todo-menu");
+    menuContainer.classList.add("todo-menu");
     dueDate.classList.add("todo-due-date");
-    menuIcon.classList.add("todo-menu-icon");
+    menuIconContainer.classList.add("todo-menu-icon");
     menuIcon.classList.add("fa", "fa-ellipsis-vertical");
     importantDiv.classList.add("todo-important");
     importantIcon.classList.add("todo-important-icon");
@@ -70,17 +71,18 @@ function renderTodos(todos, container) {
 
     todoDetails.appendChild(title);
     todoDetails.appendChild(description);
-    menuDiv.appendChild(menuIcon);
+    menuIconContainer.appendChild(menuIcon);
     importantDiv.appendChild(importantIcon);
     todoEditOptions.appendChild(todoEdit);
     todoEditOptions.appendChild(todoDelete);
-    menuDiv.appendChild(todoEditOptions);
+    menuContainer.appendChild(menuIconContainer);
+    menuContainer.appendChild(todoEditOptions);
 
     item.appendChild(checkDiv);
     item.appendChild(todoDetails);
     item.appendChild(dueDate);
     item.appendChild(importantDiv);
-    item.appendChild(menuDiv);
+    item.appendChild(menuContainer);
 
     container.appendChild(item);
   });

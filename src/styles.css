@@ -196,7 +196,7 @@ main.content {
 }
 
 .todo-important,
-.todo-menu {
+.todo-menu-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,7 +243,7 @@ main.content {
   background-color: #dddddd;
 }
 
-.todo-menu:hover,
+.todo-menu-icon:hover,
 .todo-important:hover:has(.far) {
   background-color: #cecece;
 }
