@@ -34,6 +34,10 @@ function getGlobalList() {
   return globalList;
 }
 
+function getGlobalListId() {
+  return globalList.id;
+}
+
 function addGlobalTodo(todo) {
   globalList.addTodo(todo);
 }
@@ -75,5 +79,6 @@ export {
   getPlannedTodos,
   getTodayTodos,
   getGlobalList,
-  getListById
+  getListById,
+  getGlobalListId,
 };

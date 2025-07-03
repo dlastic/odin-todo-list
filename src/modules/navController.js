@@ -8,9 +8,16 @@ import {
   getFormData,
   showListInputError,
   resetListInputPlaceholder,
+  getSelectedUserList,
+  getSelectedUserListId,
   currentView,
 } from "./domController";
-import { addGlobalTodo, addList, getLists } from "./listManager";
+import {
+  addGlobalTodo,
+  addList,
+  getLists,
+  getGlobalListId,
+} from "./listManager";
 import Todo from "./todo";
 
 export default function bindEvents() {
@@ -89,17 +96,17 @@ export default function bindEvents() {
     e.preventDefault();
 
     const { title, description, dueDate } = getFormData(newTodoForm);
-    if (["my-day", "planned", "all-tasks"].includes(currentView)) {
-      addGlobalTodo(new Todo(title, description, dueDate));
+    if (isGlobalViewSelected()) {
+      addGlobalTodo(new Todo(title, description, dueDate, getGlobalListId()));
     } else {
-      const currentList = getLists().find(
-        (list) => list.id === currentView || list.id === Number(currentView)
-      );
+      const currentList = getSelectedUserList();
       if (!currentList) {
         console.error("Current list not found!");
         return;
       }
-      currentList.addTodo(new Todo(title, description, dueDate));
+      currentList.addTodo(
+        new Todo(title, description, dueDate, getSelectedUserListId())
+      );
     }
     toggleHiddenGroup(newTodoGroup);
     renderView(currentView);
@@ -126,4 +133,8 @@ function bindUserListEvents() {
       }
     });
   });
+}
+
+function isGlobalViewSelected() {
+  return ["my-day", "planned", "all-tasks"].includes(currentView);
 }

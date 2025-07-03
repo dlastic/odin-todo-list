@@ -54,14 +54,11 @@ function renderTodos(todos, container) {
 
     todoDelete.addEventListener("click", (e) => {
       e.stopPropagation();
-      const listId = getSelectedListId();
-      console.log("List ID:", listId);
-      if (listId) {
-        const list = getListById(listId);
-        console.log("List:", list);
-        list.deleteTodo(todo.id);
-        console.log("List:", list);
-      }
+      const listId = todo.parentListId;
+      const list = getListById(listId);
+      console.log("Deleting todo:", todo.title, "from list:", list.getName());
+      list.deleteTodo(todo.id);
+      console.log("Todo deleted successfully.");
       renderView(currentView);
     });
 
@@ -181,15 +178,15 @@ function resetListInputPlaceholder(input) {
   input.placeholder = "Enter list name";
 }
 
-function getSelectedListId() {
-  if (["my-day", "planned", "all-tasks"].includes(currentView)) {
-    return getGlobalList().id;
-  }
+function getSelectedUserListId() {
+  return getSelectedUserList()?.id || null;
+}
+
+function getSelectedUserList() {
   const matchedList = getLists().find(
     (list) => list.id === Number(currentView)
   );
-  console.log("Matched List:", matchedList);
-  return matchedList ? matchedList.id : null;
+  return matchedList || null;
 }
 
 export {
@@ -203,5 +200,7 @@ export {
   resetListInputPlaceholder,
   setMinimumDate,
   showListInputError,
+  getSelectedUserList,
+  getSelectedUserListId,
   currentView,
 };
