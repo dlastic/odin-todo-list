@@ -24,6 +24,9 @@ function renderTodos(todos, container) {
     const dueDate = document.createElement("div");
     const importantIcon = document.createElement("i");
     const menuIcon = document.createElement("i");
+    const todoEditOptions = document.createElement("div");
+    const todoEdit = document.createElement("button");
+    const todoDelete = document.createElement("button");
 
     item.classList.add("todo-item");
     checkDiv.classList.add("todo-check");
@@ -34,6 +37,9 @@ function renderTodos(todos, container) {
     menuIcon.classList.add("fa", "fa-ellipsis-vertical");
     importantDiv.classList.add("todo-important");
     importantIcon.classList.add("todo-important-icon");
+    todoEditOptions.classList.add("todo-edit-options");
+    todoEdit.classList.add("todo-edit");
+    todoDelete.classList.add("todo-delete");
     todo.isImportant
       ? importantIcon.classList.add("fas", "fa-star")
       : importantIcon.classList.add("far", "fa-star");
@@ -47,11 +53,16 @@ function renderTodos(todos, container) {
     title.textContent = todo.title;
     description.textContent = todo.description;
     dueDate.textContent = `${todo.dueDate ? todo.dueDate : "No Due Date"}`;
+    todoEdit.textContent = "Edit";
+    todoDelete.textContent = "Delete";
 
     todoDetails.appendChild(title);
     todoDetails.appendChild(description);
     menuDiv.appendChild(menuIcon);
     importantDiv.appendChild(importantIcon);
+    todoEditOptions.appendChild(todoEdit);
+    todoEditOptions.appendChild(todoDelete);
+    menuDiv.appendChild(todoEditOptions);
 
     item.appendChild(checkDiv);
     item.appendChild(todoDetails);
