@@ -40,7 +40,7 @@ function renderTodos(todos, container) {
     menuIcon.classList.add("fa", "fa-ellipsis-vertical");
     importantDiv.classList.add("todo-important");
     importantIcon.classList.add("todo-important-icon");
-    todoEditOptions.classList.add("todo-edit-options");
+    todoEditOptions.classList.add("todo-edit-options", "hidden");
     todoEdit.classList.add("todo-edit");
     todoDelete.classList.add("todo-delete");
     todo.isImportant
@@ -61,6 +61,19 @@ function renderTodos(todos, container) {
       list.deleteTodo(todo.id);
       console.log("Todo deleted successfully.");
       renderView(currentView);
+    });
+
+    menuIconContainer.addEventListener("click", (e) => {
+      e.stopPropagation();
+      document.querySelectorAll(".todo-edit-options").forEach((el) => {
+        if (el !== todoEditOptions) el.classList.add("hidden");
+      });
+      // Toggle this menu
+      todoEditOptions.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", (e) => {
+      todoEditOptions.classList.add("hidden");
     });
 
     title.textContent = todo.title;
