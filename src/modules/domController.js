@@ -3,6 +3,8 @@ import {
   getTodayTodos,
   getPlannedTodos,
   getLists,
+  getGlobalList,
+  getListById,
 } from "./listManager";
 
 let currentView = "all-tasks"; // Default view
@@ -47,6 +49,19 @@ function renderTodos(todos, container) {
     importantDiv.addEventListener("click", (e) => {
       e.stopPropagation();
       todo.isImportant = !todo.isImportant;
+      renderView(currentView);
+    });
+
+    todoDelete.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const listId = getSelectedListId();
+      console.log("List ID:", listId);
+      if (listId) {
+        const list = getListById(listId);
+        console.log("List:", list);
+        list.deleteTodo(todo.id);
+        console.log("List:", list);
+      }
       renderView(currentView);
     });
 
@@ -164,6 +179,17 @@ function showListInputError(input, message) {
 
 function resetListInputPlaceholder(input) {
   input.placeholder = "Enter list name";
+}
+
+function getSelectedListId() {
+  if (["my-day", "planned", "all-tasks"].includes(currentView)) {
+    return getGlobalList().id;
+  }
+  const matchedList = getLists().find(
+    (list) => list.id === Number(currentView)
+  );
+  console.log("Matched List:", matchedList);
+  return matchedList ? matchedList.id : null;
 }
 
 export {

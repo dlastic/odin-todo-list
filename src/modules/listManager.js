@@ -22,6 +22,18 @@ function getLists() {
   return lists;
 }
 
+function getAllLists() {
+  return [...lists, globalList];
+}
+
+function getListById(id) {
+  return getAllLists().find((list) => list.id === id);
+}
+
+function getGlobalList() {
+  return globalList;
+}
+
 function addGlobalTodo(todo) {
   globalList.addTodo(todo);
 }
@@ -62,4 +74,6 @@ export {
   getAllTodos,
   getPlannedTodos,
   getTodayTodos,
+  getGlobalList,
+  getListById
 };
