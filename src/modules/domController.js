@@ -18,6 +18,7 @@ function renderTodos(todos, container) {
   todos.forEach((todo) => {
     const item = document.createElement("div");
     const checkDiv = document.createElement("div");
+    const checkIcon = document.createElement("i");
     const todoDetails = document.createElement("div");
     const menuContainer = document.createElement("div");
     const importantDiv = document.createElement("div");
@@ -44,9 +45,19 @@ function renderTodos(todos, container) {
     todoEditOptions.classList.add("todo-edit-options", "hidden");
     todoEdit.classList.add("todo-edit");
     todoDelete.classList.add("todo-delete");
-    todo.isImportant
-      ? importantIcon.classList.add("fas", "fa-star")
-      : importantIcon.classList.add("far", "fa-star");
+    importantIcon.classList.add("fa-star", todo.isImportant ? "fas" : "far");
+    checkIcon.classList.add(
+      "fa",
+      todo.completed ? "fa-check-circle" : "fa-circle",
+      todo.completed ? "fa-solid" : "fa-regular"
+    );
+    item.classList.toggle("todo-completed", todo.completed);
+
+    checkDiv.addEventListener("click", (e) => {
+      e.stopPropagation();
+      todo.toggleComplete();
+      renderView(currentView);
+    });
 
     importantDiv.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -64,9 +75,7 @@ function renderTodos(todos, container) {
       e.stopPropagation();
       const listId = todo.parentListId;
       const list = getListById(listId);
-      console.log("Deleting todo:", todo.title, "from list:", list.getName());
       list.deleteTodo(todo.id);
-      console.log("Todo deleted successfully.");
       renderView(currentView);
     });
 
@@ -96,6 +105,7 @@ function renderTodos(todos, container) {
     todoEditOptions.appendChild(todoDelete);
     menuContainer.appendChild(menuIconContainer);
     menuContainer.appendChild(todoEditOptions);
+    checkDiv.appendChild(checkIcon);
 
     item.appendChild(checkDiv);
     item.appendChild(todoDetails);

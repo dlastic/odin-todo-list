@@ -174,14 +174,18 @@ main.content {
   gap: 10px;
 }
 
+.todo-completed {
+  opacity: 0.6;
+  background-color: #afafaf;
+}
+
+.todo-completed h3,
+.todo-completed p {
+  text-decoration: line-through;
+}
+
 .todo-check {
-  width: 20px;
-  height: 20px;
   border-radius: 50%;
-  border: 2px solid #0a1d37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 

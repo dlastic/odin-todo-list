@@ -8,6 +8,7 @@ export default class Todo {
     this.isImportant = false;
     this.id = nextTodoId++;
     this.parentListId = parentListId;
+    this.completed = false;
   }
 
   toggleComplete() {
