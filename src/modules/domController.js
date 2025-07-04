@@ -30,6 +30,7 @@ function renderTodos(todos, container) {
     const todoEditOptions = document.createElement("div");
     const todoEdit = document.createElement("button");
     const todoDelete = document.createElement("button");
+    const editTodoFormContainer = renderEditTodoForm(todo);
 
     item.classList.add("todo-item");
     checkDiv.classList.add("todo-check");
@@ -53,6 +54,12 @@ function renderTodos(todos, container) {
       renderView(currentView);
     });
 
+    todoEdit.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleHidden(editTodoFormContainer);
+      toggleHidden(item);
+    });
+
     todoDelete.addEventListener("click", (e) => {
       e.stopPropagation();
       const listId = todo.parentListId;
@@ -68,7 +75,6 @@ function renderTodos(todos, container) {
       document.querySelectorAll(".todo-edit-options").forEach((el) => {
         if (el !== todoEditOptions) el.classList.add("hidden");
       });
-      // Toggle this menu
       todoEditOptions.classList.toggle("hidden");
     });
 
@@ -98,6 +104,7 @@ function renderTodos(todos, container) {
     item.appendChild(menuContainer);
 
     container.appendChild(item);
+    container.appendChild(editTodoFormContainer);
   });
 }
 
@@ -202,6 +209,62 @@ function getSelectedUserList() {
     (list) => list.id === Number(currentView)
   );
   return matchedList || null;
+}
+
+function renderEditTodoForm(todo) {
+  const container = document.createElement("div");
+  const form = document.createElement("form");
+  const titleInput = document.createElement("input");
+  const descriptionInput = document.createElement("input");
+  const dueDateInput = document.createElement("input");
+  const confirmBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  container.classList.add("edit-todo-popup", "hidden");
+  form.id = "edit-todo-form";
+  form.autocomplete = "off";
+  titleInput.name = "title";
+  titleInput.value = todo.title;
+  titleInput.classList.add("edit-todo-title");
+  titleInput.placeholder = "Title";
+  titleInput.required = true;
+  descriptionInput.name = "description";
+  descriptionInput.value = todo.description;
+  descriptionInput.placeholder = "Description";
+  dueDateInput.type = "date";
+  dueDateInput.name = "dueDate";
+  dueDateInput.value = todo.dueDate || "";
+  confirmBtn.textContent = "Confirm";
+  confirmBtn.type = "submit";
+  confirmBtn.classList.add("confirm-btn");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.type = "button";
+  cancelBtn.classList.add("cancel-btn");
+
+  form.appendChild(titleInput);
+  form.appendChild(descriptionInput);
+  form.appendChild(dueDateInput);
+  form.appendChild(confirmBtn);
+  form.appendChild(cancelBtn);
+  container.appendChild(form);
+
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleHidden(container);
+    renderView(currentView);
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = getFormData(form);
+    todo.title = data.title;
+    todo.description = data.description;
+    todo.dueDate = data.dueDate || null;
+    toggleHidden(container);
+    renderView(currentView);
+  });
+
+  return container;
 }
 
 export {

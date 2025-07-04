@@ -215,7 +215,7 @@ main.content {
 .todo-edit-options {
   position: absolute;
   top: 110%;
-  right: 50%;
+  right: 90%;
   background-color: #ffffff;
   color: #0a1d37;
   border: 1px solid #ccc;
@@ -267,31 +267,37 @@ main.content {
   outline: none;
 }
 
-.new-todo-popup {
+.new-todo-popup,
+.edit-todo-popup {
   background: #fff;
   color: #0a1d37;
   border-radius: 6px;
   box-shadow: 0 4px 16px rgba(10, 29, 55, 0.15);
   padding: 20px;
+  margin-bottom: 15px;
   min-width: 270px;
   z-index: 200;
 }
 
-#new-todo-form {
+#new-todo-form,
+#edit-todo-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 #new-todo-form input,
-#new-todo-form select {
+#new-todo-form select,
+#edit-todo-form input,
+#edit-todo-form select {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
 }
 
-.add-todo-btn {
+.add-todo-btn,
+.confirm-btn {
   background-color: #0a1d37;
   color: #fff;
   border: none;
@@ -305,12 +311,15 @@ main.content {
 }
 
 .add-todo-btn:hover,
-.add-todo-btn:focus {
+.add-todo-btn:focus,
+.confirm-btn:hover,
+.confirm-btn:focus {
   background-color: #1f3b62;
   outline: none;
 }
 
-.cancel-todo-btn {
+.cancel-todo-btn,
+.cancel-btn {
   background-color: #949494;
   color: #0a1d37;
   border: none;
@@ -322,7 +331,9 @@ main.content {
 }
 
 .cancel-todo-btn:hover,
-.cancel-todo-btn:focus {
+.cancel-todo-btn:focus,
+.cancel-btn:hover,
+.cancel-btn:focus {
   background-color: #eaeef3;
   outline: none;
 }
