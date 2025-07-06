@@ -4,18 +4,32 @@ const lists = [];
 const globalList = new TodoList("Global");
 
 function addList(name) {
-  const trimmed = name.trim();
-  if (!trimmed) {
+  if (!isValidListName(name)) {
     return null;
   }
-  if (
-    lists.some((list) => list.getName().toLowerCase() === trimmed.toLowerCase())
-  ) {
-    return null;
-  }
-  const list = new TodoList(trimmed);
+  const list = new TodoList(name.trim());
   lists.push(list);
   return list;
+}
+
+function renameList(id, newName) {
+  if (!isValidListName(newName)) {
+    return null;
+  }
+  const list = getListById(id);
+  if (!list) return null;
+  list.name = newName.trim();
+  return list;
+}
+
+function isValidListName(name) {
+  const trimmed = name.trim();
+  return (
+    trimmed.length > 0 &&
+    !getLists().some(
+      (list) => list.getName().toLowerCase() === trimmed.toLowerCase()
+    )
+  );
 }
 
 function getLists() {
@@ -81,4 +95,5 @@ export {
   getGlobalList,
   getListById,
   getGlobalListId,
+  renameList
 };

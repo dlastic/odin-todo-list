@@ -3,7 +3,6 @@ import {
   getTodayTodos,
   getPlannedTodos,
   getLists,
-  getGlobalList,
   getListById,
 } from "./listManager";
 
@@ -160,14 +159,22 @@ function renderLists(lists) {
   const listsContainer = document.querySelector(".user-lists");
   clearContainer(listsContainer);
   lists.forEach((list) => {
-    const listItem = document.createElement("li");
-    const btn = document.createElement("button");
+    const listItem = document.createElement("div");
+    const listName = document.createElement("span");
+    const menuContainer = document.createElement("div");
+    const menuIconContainer = document.createElement("div");
+    const menuIcon = document.createElement("i");
 
-    btn.classList.add("nav-link");
-    btn.textContent = list.getName();
-    btn.dataset.id = list.id;
+    listItem.classList.add("nav-link");
+    listItem.dataset.id = list.id;
+    listName.textContent = list.getName();
+    menuIconContainer.classList.add("list-menu-icon");
+    menuIcon.classList.add("fa", "fa-ellipsis-vertical");
 
-    listItem.appendChild(btn);
+    menuIconContainer.appendChild(menuIcon);
+    menuContainer.appendChild(menuIconContainer);
+    listItem.appendChild(listName);
+    listItem.appendChild(menuContainer);
     listsContainer.appendChild(listItem);
   });
 }

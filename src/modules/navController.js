@@ -17,11 +17,12 @@ import {
   addList,
   getLists,
   getGlobalListId,
+  getListById,
 } from "./listManager";
 import Todo from "./todo";
 
 export default function bindEvents() {
-  const homeBtns = document.querySelectorAll(".home-section button");
+  const homeNavLinks = document.querySelectorAll(".home-section .nav-link");
   const addListBtn = document.querySelector(".add-list-btn");
   const addListPopup = document.querySelector(".add-list-popup");
   const addListGroup = [addListBtn, addListPopup];
@@ -41,7 +42,7 @@ export default function bindEvents() {
     renderView(currentView);
   });
 
-  homeBtns.forEach((btn) => {
+  homeNavLinks.forEach((btn) => {
     btn.addEventListener("click", () => {
       renderView(btn.dataset.view);
     });
@@ -123,11 +124,11 @@ export default function bindEvents() {
 }
 
 function bindUserListEvents() {
-  const userListButtons = document.querySelectorAll(".user-lists li button");
-  userListButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = Number(btn.dataset.id);
-      const list = getLists().find((l) => l.id === id);
+  const userListNavLinks = document.querySelectorAll(".user-lists .nav-link");
+  userListNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const id = Number(link.dataset.id);
+      const list = getListById(id);
       if (list) {
         renderView(list.id);
       }

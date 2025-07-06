@@ -64,6 +64,9 @@ main.content {
   background: none;
   border: none;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-align: left;
   font-size: 1rem;
   width: 100%;
@@ -78,6 +81,7 @@ main.content {
   background-color: #1f3b62;
   outline: none;
 }
+
 
 .add-list-btn {
   margin-top: 10px;
