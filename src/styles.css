@@ -82,7 +82,6 @@ main.content {
   outline: none;
 }
 
-
 .add-list-btn {
   margin-top: 10px;
   background-color: #0a1d37;
@@ -216,11 +215,24 @@ main.content {
   font-size: 1.3rem;
 }
 
-.todo-menu {
+.list-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.todo-menu,
+.list-menu {
   position: relative;
 }
 
-.todo-edit-options {
+.todo-edit-options,
+.list-edit-options {
   position: absolute;
   top: 110%;
   right: 90%;
@@ -235,7 +247,8 @@ main.content {
   z-index: 100;
 }
 
-.todo-edit-options button {
+.todo-edit-options button,
+.list-edit-options button {
   font-size: 1rem;
   background: none;
   border: none;
@@ -248,13 +261,18 @@ main.content {
   transition: background-color 0.2s;
 }
 
-.todo-edit-options button:hover {
+.todo-edit-options button:hover,
+.list-edit-options button:hover {
   background-color: #dddddd;
 }
 
 .todo-menu-icon:hover,
 .todo-important:hover:has(.far) {
   background-color: #cecece;
+}
+
+.list-menu-icon:hover {
+  background-color: #0c255a;
 }
 
 .new-todo-btn {

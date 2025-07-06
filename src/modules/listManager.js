@@ -95,5 +95,5 @@ export {
   getGlobalList,
   getListById,
   getGlobalListId,
-  renameList
+  renameList,
 };

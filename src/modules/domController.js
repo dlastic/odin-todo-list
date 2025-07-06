@@ -4,6 +4,7 @@ import {
   getPlannedTodos,
   getLists,
   getListById,
+  renameList,
 } from "./listManager";
 
 let currentView = "all-tasks"; // Default view
@@ -164,18 +165,48 @@ function renderLists(lists) {
     const menuContainer = document.createElement("div");
     const menuIconContainer = document.createElement("div");
     const menuIcon = document.createElement("i");
+    const listEditOptions = document.createElement("div");
+    const listRenameBtn = document.createElement("button");
+    const listDeleteBtn = document.createElement("button");
+    const listEditFormContainer = renderEditListForm(list);
 
     listItem.classList.add("nav-link");
     listItem.dataset.id = list.id;
     listName.textContent = list.getName();
+    menuContainer.classList.add("list-menu");
     menuIconContainer.classList.add("list-menu-icon");
     menuIcon.classList.add("fa", "fa-ellipsis-vertical");
+    listEditOptions.classList.add("list-edit-options", "hidden");
+    listRenameBtn.classList.add("list-rename");
+    listDeleteBtn.classList.add("list-delete");
+
+    listRenameBtn.textContent = "Rename";
+    listDeleteBtn.textContent = "Delete";
 
     menuIconContainer.appendChild(menuIcon);
     menuContainer.appendChild(menuIconContainer);
+    menuContainer.appendChild(listEditOptions);
+    listEditOptions.appendChild(listRenameBtn);
+    listEditOptions.appendChild(listDeleteBtn);
     listItem.appendChild(listName);
     listItem.appendChild(menuContainer);
     listsContainer.appendChild(listItem);
+    listsContainer.appendChild(listEditFormContainer);
+
+    menuIconContainer.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleHidden(listEditOptions);
+    });
+
+    listRenameBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleHidden(listEditFormContainer);
+      toggleHidden(listItem);
+    });
+
+    document.addEventListener("click", () => {
+      listEditOptions.classList.add("hidden");
+    });
   });
 }
 
@@ -279,6 +310,48 @@ function renderEditTodoForm(todo) {
     todo.dueDate = data.dueDate || null;
     toggleHidden(container);
     renderView(currentView);
+  });
+
+  return container;
+}
+
+function renderEditListForm(list) {
+  const container = document.createElement("div");
+  const form = document.createElement("form");
+  const nameInput = document.createElement("input");
+  const confirmBtn = document.createElement("button");
+  const cancelBtn = document.createElement("button");
+
+  container.classList.add("edit-list-popup", "hidden");
+  form.id = "edit-list-form";
+  form.autocomplete = "off";
+  nameInput.name = "name";
+  nameInput.value = list.getName();
+  nameInput.classList.add("edit-list-name");
+  nameInput.placeholder = "Enter list name";
+  nameInput.required = true;
+  confirmBtn.textContent = "Confirm";
+  confirmBtn.type = "submit";
+  confirmBtn.classList.add("confirm-btn");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.type = "button";
+  cancelBtn.classList.add("cancel-btn");
+
+  form.appendChild(nameInput);
+  form.appendChild(confirmBtn);
+  form.appendChild(cancelBtn);
+  container.appendChild(form);
+
+  cancelBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    toggleHidden(container);
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = getFormData(form);
+    renameList(list.id, data.name);
+    renderLists(getLists());
   });
 
   return container;
