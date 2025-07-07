@@ -22,6 +22,13 @@ function renameList(id, newName) {
   return list;
 }
 
+function deleteList(id) {
+  const index = lists.findIndex((list) => list.id === id);
+  if (index !== -1) {
+    lists.splice(index, 1);
+  }
+}
+
 function isValidListName(name) {
   const trimmed = name.trim();
   return (
@@ -96,4 +103,5 @@ export {
   getListById,
   getGlobalListId,
   renameList,
+  deleteList,
 };

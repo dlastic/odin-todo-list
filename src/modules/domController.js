@@ -5,6 +5,7 @@ import {
   getLists,
   getListById,
   renameList,
+  deleteList,
 } from "./listManager";
 
 let currentView = "all-tasks"; // Default view
@@ -204,6 +205,13 @@ function renderLists(lists) {
       toggleHidden(listEditFormContainer);
       toggleHidden(listItem);
       listEditFormContainer.querySelector("input").focus();
+    });
+
+    listDeleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteList(list.id);
+      renderLists(getLists());
+      renderView("all-tasks");
     });
 
     document.addEventListener("click", () => {
