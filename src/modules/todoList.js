@@ -1,3 +1,5 @@
+import { saveToLocalStorage } from "./listManager";
+
 let nextListId = 1;
 
 export default class TodoList {
@@ -9,6 +11,7 @@ export default class TodoList {
 
   addTodo(todo) {
     this.todos.push(todo);
+    saveToLocalStorage();
   }
 
   deleteTodo(id) {
@@ -16,6 +19,7 @@ export default class TodoList {
     if (index !== -1) {
       this.todos.splice(index, 1);
     }
+    saveToLocalStorage();
   }
 
   getTodos() {

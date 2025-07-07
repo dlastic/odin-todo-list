@@ -111,7 +111,9 @@ export default function bindEvents() {
       return;
     }
     if (isGlobalViewSelected()) {
-      addGlobalTodo(new Todo(trimmed_title, description, dueDate, getGlobalListId()));
+      addGlobalTodo(
+        new Todo(trimmed_title, description, dueDate, getGlobalListId())
+      );
     } else {
       const currentList = getSelectedUserList();
       if (!currentList) {

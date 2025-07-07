@@ -7,6 +7,7 @@ import {
   renameList,
   deleteList,
   getImportantTodos,
+  saveToLocalStorage,
 } from "./listManager";
 
 let currentView = "all-tasks"; // Default view
@@ -130,7 +131,6 @@ function renderView(view) {
   const matchedList = lists.find(
     (list) => list.id === view || list.id === Number(view)
   );
-  console.log("Current View:", view);
   if (matchedList) {
     projectHeading.textContent = matchedList.getName();
     renderTodos(matchedList.getTodos(), projectContent);
@@ -336,6 +336,7 @@ function renderEditTodoForm(todo) {
     todo.title = data.title;
     todo.description = data.description;
     todo.dueDate = data.dueDate || null;
+    saveToLocalStorage();
     toggleHidden(container);
     renderView(currentView);
   });

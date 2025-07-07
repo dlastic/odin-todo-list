@@ -1,4 +1,5 @@
 import TodoList from "./todoList";
+import Todo from "./todo";
 
 const lists = [];
 const globalList = new TodoList("Global");
@@ -9,6 +10,7 @@ function addList(name) {
   }
   const list = new TodoList(name.trim());
   lists.push(list);
+  saveToLocalStorage();
   return list;
 }
 
@@ -19,6 +21,7 @@ function renameList(id, newName) {
   const list = getListById(id);
   if (!list) return null;
   list.name = newName.trim();
+  saveToLocalStorage();
   return list;
 }
 
@@ -27,6 +30,7 @@ function deleteList(id) {
   if (index !== -1) {
     lists.splice(index, 1);
   }
+  saveToLocalStorage();
 }
 
 function isValidListName(name) {
@@ -95,6 +99,39 @@ function getImportantTodos() {
   return getAllTodos().filter((todo) => todo.isImportant);
 }
 
+function saveToLocalStorage() {
+  const data = {
+    lists: lists.map((list) => ({
+      id: list.id,
+      name: list.name,
+      todos: list.todos,
+    })),
+    globalList: {
+      id: globalList.id,
+      name: globalList.name,
+      todos: globalList.todos,
+    },
+  };
+  localStorage.setItem("odin-todo-data", JSON.stringify(data));
+}
+
+function loadFromLocalStorage() {
+  const data = JSON.parse(localStorage.getItem("odin-todo-data"));
+  if (!data) return;
+  lists.length = 0;
+  data.lists.forEach((listData) => {
+    const list = new TodoList(listData.name);
+    list.id = listData.id;
+    list.todos = listData.todos.map((todo) => Object.assign(new Todo(), todo));
+    lists.push(list);
+  });
+  globalList.id = data.globalList.id;
+  globalList.name = data.globalList.name;
+  globalList.todos = data.globalList.todos.map((todo) =>
+    Object.assign(new Todo(), todo)
+  );
+}
+
 export {
   addList,
   getLists,
@@ -109,4 +146,7 @@ export {
   renameList,
   deleteList,
   getImportantTodos,
+  saveToLocalStorage,
+  loadFromLocalStorage,
+  getAllLists,
 };
