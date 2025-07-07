@@ -137,5 +137,5 @@ export default function bindEvents() {
 }
 
 function isGlobalViewSelected() {
-  return ["my-day", "planned", "all-tasks"].includes(currentView);
+  return ["my-day", "planned", "all-tasks", "important"].includes(currentView);
 }

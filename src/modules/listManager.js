@@ -91,6 +91,10 @@ function getTodayTodos() {
   });
 }
 
+function getImportantTodos() {
+  return getAllTodos().filter((todo) => todo.isImportant);
+}
+
 export {
   addList,
   getLists,
@@ -104,4 +108,5 @@ export {
   getGlobalListId,
   renameList,
   deleteList,
+  getImportantTodos,
 };

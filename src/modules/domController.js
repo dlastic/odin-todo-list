@@ -6,6 +6,7 @@ import {
   getListById,
   renameList,
   deleteList,
+  getImportantTodos,
 } from "./listManager";
 
 let currentView = "all-tasks"; // Default view
@@ -150,6 +151,11 @@ function renderView(view) {
     case "all-tasks":
       projectHeading.textContent = "All Tasks";
       renderTodos(getAllTodos(), projectContent);
+      break;
+
+    case "important":
+      projectHeading.textContent = "Important";
+      renderTodos(getImportantTodos(), projectContent);
       break;
 
     default:
