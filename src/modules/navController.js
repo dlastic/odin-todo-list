@@ -27,7 +27,9 @@ export default function bindEvents() {
   const addListPopup = document.querySelector(".add-list-popup");
   const addListGroup = [addListBtn, addListPopup];
   const addNewListBtn = document.querySelector(".add-btn");
-  const cancelNewListBtn = document.querySelector(".cancel-btn");
+  const cancelNewListBtn = document.querySelector(
+    ".add-list-popup-btns .cancel-btn"
+  );
   const addNewListInput = document.querySelector(".add-list-input");
   const newTodoBtn = document.querySelector(".new-todo-btn");
   const newTodoPopup = document.querySelector(".new-todo-popup");
@@ -40,6 +42,13 @@ export default function bindEvents() {
   document.addEventListener("DOMContentLoaded", () => {
     setMinimumDate(dueDateInput);
     renderView(currentView);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target !== addListBtn && !addListPopup.contains(e.target)) {
+      addListPopup.classList.add("hidden");
+      addListBtn.classList.remove("hidden");
+    }
   });
 
   homeNavLinks.forEach((btn) => {
@@ -79,7 +88,6 @@ export default function bindEvents() {
     resetListInputPlaceholder(addNewListInput);
     renderLists(getLists());
     renderView(result.id);
-    bindUserListEvents();
   });
 
   cancelNewListBtn.addEventListener("click", () => {
@@ -120,19 +128,6 @@ export default function bindEvents() {
 
   dueDateInput.addEventListener("click", () => {
     dueDateInput.showPicker();
-  });
-}
-
-function bindUserListEvents() {
-  const userListNavLinks = document.querySelectorAll(".user-lists .nav-link");
-  userListNavLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      const id = Number(link.dataset.id);
-      const list = getListById(id);
-      if (list) {
-        renderView(list.id);
-      }
-    });
   });
 }
 

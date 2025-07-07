@@ -95,14 +95,16 @@ main.content {
   transition: background 0.2s ease;
 }
 
-.add-list-popup {
+.add-list-popup,
+#edit-list-form {
   border-radius: 5px;
   z-index: 100;
   color: #0a1d37;
   margin-top: 10px;
 }
 
-.add-list-popup input {
+.add-list-popup input,
+#edit-list-form input {
   width: 100%;
   padding: 8px 10px;
   margin-bottom: 15px;
@@ -111,13 +113,15 @@ main.content {
   font-size: 1rem;
 }
 
-.add-list-popup-btns {
+.add-list-popup-btns,
+.edit-list-btns {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
 
-.add-list-popup-btns button {
+.add-list-popup-btns button,
+.edit-list-btns button {
   flex: 1;
   padding: 8px 12px;
   border: none;
@@ -127,12 +131,14 @@ main.content {
   transition: background-color 0.2s;
 }
 
-.add-btn {
+.add-btn,
+.confirm-list-btn {
   background-color: #0a1d37;
   color: white;
 }
 
-.add-btn:hover {
+.add-btn:hover,
+.confirm-list-btn:hover {
   background-color: #1f3b62;
 }
 

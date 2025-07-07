@@ -128,6 +128,7 @@ function renderView(view) {
   const matchedList = lists.find(
     (list) => list.id === view || list.id === Number(view)
   );
+  console.log("Current View:", view);
   if (matchedList) {
     projectHeading.textContent = matchedList.getName();
     renderTodos(matchedList.getTodos(), projectContent);
@@ -202,10 +203,19 @@ function renderLists(lists) {
       e.stopPropagation();
       toggleHidden(listEditFormContainer);
       toggleHidden(listItem);
+      listEditFormContainer.querySelector("input").focus();
     });
 
     document.addEventListener("click", () => {
       listEditOptions.classList.add("hidden");
+    });
+
+    listItem.addEventListener("click", () => {
+      const id = Number(listItem.dataset.id);
+      const list = getListById(id);
+      if (list) {
+        renderView(list.id);
+      }
     });
   });
 }
@@ -319,6 +329,7 @@ function renderEditListForm(list) {
   const container = document.createElement("div");
   const form = document.createElement("form");
   const nameInput = document.createElement("input");
+  const editListBtns = document.createElement("div");
   const confirmBtn = document.createElement("button");
   const cancelBtn = document.createElement("button");
 
@@ -332,26 +343,34 @@ function renderEditListForm(list) {
   nameInput.required = true;
   confirmBtn.textContent = "Confirm";
   confirmBtn.type = "submit";
-  confirmBtn.classList.add("confirm-btn");
+  confirmBtn.classList.add("confirm-list-btn");
   cancelBtn.textContent = "Cancel";
   cancelBtn.type = "button";
   cancelBtn.classList.add("cancel-btn");
+  editListBtns.classList.add("edit-list-btns");
 
   form.appendChild(nameInput);
-  form.appendChild(confirmBtn);
-  form.appendChild(cancelBtn);
+  form.appendChild(editListBtns);
+  editListBtns.appendChild(confirmBtn);
+  editListBtns.appendChild(cancelBtn);
   container.appendChild(form);
 
   cancelBtn.addEventListener("click", (e) => {
     e.preventDefault();
     toggleHidden(container);
+    renderLists(getLists());
   });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = getFormData(form);
-    renameList(list.id, data.name);
+    const result = renameList(list.id, data.name);
+    if (result === null) {
+      showListInputError(nameInput, "List already exists!");
+      return;
+    }
     renderLists(getLists());
+    renderView(list.id);
   });
 
   return container;
