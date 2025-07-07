@@ -323,6 +323,10 @@ function renderEditTodoForm(todo) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = getFormData(form);
+    if (!data.title.trim()) {
+      showListInputError(titleInput, "Title is required!");
+      return;
+    }
     todo.title = data.title;
     todo.description = data.description;
     todo.dueDate = data.dueDate || null;

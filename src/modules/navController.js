@@ -105,8 +105,13 @@ export default function bindEvents() {
     e.preventDefault();
 
     const { title, description, dueDate } = getFormData(newTodoForm);
+    const trimmed_title = title.trim();
+    if (!trimmed_title) {
+      showListInputError(todoTitleInput, "Title is required!");
+      return;
+    }
     if (isGlobalViewSelected()) {
-      addGlobalTodo(new Todo(title, description, dueDate, getGlobalListId()));
+      addGlobalTodo(new Todo(trimmed_title, description, dueDate, getGlobalListId()));
     } else {
       const currentList = getSelectedUserList();
       if (!currentList) {
@@ -114,7 +119,7 @@ export default function bindEvents() {
         return;
       }
       currentList.addTodo(
-        new Todo(title, description, dueDate, getSelectedUserListId())
+        new Todo(trimmed_title, description, dueDate, getSelectedUserListId())
       );
     }
     toggleHiddenGroup(newTodoGroup);
